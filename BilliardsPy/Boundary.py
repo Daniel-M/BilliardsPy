@@ -1,46 +1,21 @@
 #!/usr/bin/python
-import random
 
-class Frontier:
-    'Main class to define billiard balls objects'
+class Boundary:
+    'Main class to define billiard table boundary objects'
 
-    def __init__(self,mass,radious,position,velocity):
-        self.Mass=mass
-        self.Radious=radious
-        self.Position=position
-        self.Velocity=velocity
+    def __init__(self,name,function,parameters):
+        self.Name=name
+        self.Function=function
+        self.Parameters=parameters
 
     def __str__(self):
-        return "Ball mass: %f" % (self.Mass)
+        return self.Name
 
-    def getMass(self):
-        return self.Mass
-
-    def getPosition(self):
-        return self.Position
+    def getFunction(self):
+        return self.function
     
-    def getVelocity(self):
-        return self.Velocity
+    def getParameters(self):
+        return self.Parameters
 
-    def move(self,delta):
-        random.seed()
-        variation =  random.uniform(-0.1*delta,0.1*delta)
-        self.Position = self.Position + delta*self.Velocity + variation
-
-    def reverseVelocity(self,component):
-        random.seed()
-        variation = random.uniform(-0.01*self.Velocity[component],0.01*self.Velocity[component])
-        self.Velocity[component] = -1.0*self.Velocity[component] + variation
-
-
-    def collide(self,limits):
-        if( 0 >= self.Position[0]+self.Radious):
-            self.reverseVelocity(0)
-        elif(self.Position[0]+self.Radious >= limits[0]):
-            self.reverseVelocity(0)
-        elif( 0 > self.Position[1]+self.Radious):
-            self.reverseVelocity(1)
-        elif(self.Position[1]+self.Radious >= limits[1]):
-            self.reverseVelocity(1)
-
-
+    def evaluate(self,*arguments):
+        return self.Function(self.Parameters,*arguments)

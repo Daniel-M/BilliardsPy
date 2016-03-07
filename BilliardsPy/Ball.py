@@ -32,7 +32,6 @@ class Ball:
         variation = random.uniform(-0.01*self.Velocity[component],0.01*self.Velocity[component])
         self.Velocity[component] = -1.0*self.Velocity[component] + variation
 
-
     def collide(self,limits):
         if( 0 >= self.Position[0]+self.Radious):
             self.reverseVelocity(0)
@@ -43,5 +42,9 @@ class Ball:
         elif(self.Position[1]+self.Radious >= limits[1]):
             self.reverseVelocity(1)
 
-    def checkBoundary(self,funcionFrontera,*argumentos):
-        funcionFrontera(*argumentos)
+    def checkState(self,bBoundary):
+        result = bBoundary.evaluate(self.Position)
+        return result 
+    
+    #def checkBoundary(self,funcionFrontera,*argumentos):
+        #return funcionFrontera(*argumentos)
