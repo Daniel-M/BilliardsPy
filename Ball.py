@@ -43,4 +43,5 @@ class Ball:
         elif(self.Position[1]+self.Radious >= limits[1]):
             self.reverseVelocity(1)
 
-
+    def checkBoundary(self,funcionFrontera,*argumentos):
+        funcionFrontera(*argumentos)
